@@ -1,0 +1,27 @@
+.ggg{
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+    background-size: 1920px 1080px;
+    height: 400px;
+}
+
+.tt{
+    margin-top: 55px;
+}
+.bb{
+    margin-top: 25px;    
+}
+.ph{
+    height: 338px;   
+    width: 278px;
+    size: 300%;
+}
+.cl{
+    margin-left: 25px;   
+}
+
+.ff{
+    
+    background-color:#f7f7f7;
+    height: 250px;
+    margin-top: 65px;
+}
