@@ -1,0 +1,80 @@
+.ggg{
+    background-size: 1920px 1080px;
+    height: 400px;
+}
+
+.tt{
+    margin-top: 55px;
+}
+.bb{
+    margin-top: 25px;    
+}
+.ph{
+    height: 338px;   
+    width: 278px;
+    size: 300%;
+}
+.cl{
+    margin-left: 25px;   
+}
+
+.ff{
+    background-color:#f7f7f7;
+    height: 250px;
+    margin-top: 65px;
+}
+.side{
+    
+    margin-left: 37%;
+    margin-right: 37%;
+}
+.vv{
+    margin-top: 13%;
+    background-color: white;
+}
+.ll{
+    margin-left: 5%;
+}
+.si{
+    margin-left: 47%;
+    margin-right: 50%;
+
+}
+.sii{
+    margin-left: 11%;
+    margin-right: 11%;    
+}
+.le{
+    margin-left: 10%;
+}
+.lle{
+    margin-left: 20%;
+}
+.ss:hover{
+    color:rgb(50, 90, 202);
+    
+}
+.siii{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.vv2{
+    margin-top: 10%;
+    background-color: white;
+}
+.sign_in {
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+
+}
+.sign_up {
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+
+}
+
+body{
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+}
+
+nav{
+    background-color: white;
+}

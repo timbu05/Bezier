@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='img/free-icon-curves-1151114.png')}}" type="image/x-icon">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/fontello.css') }}" >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" >
+</head>
+<body class = " sign_in ">
+    <form class=" vv side border border-#dbd9d9 rounded" method="POST" action = '/vhod' enctype = 'multipart/form-data'>
+        <div class="p-3">
+
+        </div>
+        <div class=" row justify-content-center ">
+          
+          <div class="col-3">
+            <h1 > Вход </h1>
+          </div>
+          
+            
+        </div>
+
+        <div class="mb-3 mt-4 sii ">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <label for="email" class="form-label ">Введите ваш email</label>
+            <input type="text" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+          
+          
+        </div>
+        <div class="mb-3 sii ">
+          <label for="password" class="form-label">Пароль</label>
+          <input type="text" class="form-control" id="password" name="password">
+        </div>
+        
+          <div style=" padding-top: 7%;" class="row justify-content-md-start">
+            <div class="col-5 le">
+              <a href="reg" type="link" class="link-primary text-decoration-none">
+                <div class="h-100 w-75 ss">
+                  Создать аккаунт
+                </div>
+              </a>
+            </div>
+            <div class="col-3 lle padding-top:5%">
+              <button type="submit" class="btn btn-primary">Войти</button>
+            </div>
+            </div>  
+        </div>
+        <div class="p-4">
+
+        </div>
+    
+    </form>  
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
