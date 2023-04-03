@@ -1,4 +1,5 @@
 .ggg{
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
     background-size: 1920px 1080px;
     height: 400px;
 }
@@ -19,6 +20,7 @@
 }
 
 .ff{
+    
     background-color:#f7f7f7;
     height: 250px;
     margin-top: 65px;
@@ -30,7 +32,7 @@
 }
 .vv{
     margin-top: 13%;
-    background-color: white;
+    
 }
 .ll{
     margin-left: 5%;
@@ -60,21 +62,34 @@
 }
 .vv2{
     margin-top: 10%;
-    background-color: white;
+   
 }
-.sign_in {
-    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
-
+.cc{
+    background-color:#f7f7f7;    
 }
-.sign_up {
-    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
-
+.v3{
+    margin-top: 3%;
+}
+.si2{
+    
+    margin-left: 7%;
+    margin-right: 27%;
+}
+.lg{
+    margin-left: 4%; 
+    padding-top: 3%;   
+}
+.re{
+    margin-left: 4%;     
 }
 
-body{
-    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+.pr{
+    margin-right: 4%;    
 }
-
-nav{
-    background-color: white;
+.prpa{
+    margin-right: 52%;
+}
+.s3{
+    margin-left: 50%;
+    margin-right: 0%;
 }

@@ -51,8 +51,6 @@ def index():
         db.session.add(upload)
         db.session.commit()
         
-        i_d = upload.id
-        f = Upload.query.filter_by(id=i_d).first()
         graph.draw(f.Data, f.filename)
         return redirect('/')
         
@@ -65,12 +63,13 @@ def vhod():
         password = request.form['password']
 
         user = Users.query.filter_by(email=email).first()
+        login = user.login
 
         if not user or not check_password_hash(user.password, password):
             flash('Проверьте логин или пароль')
             return redirect('/vhod')
         else:
-            return redirect('/user')
+            return render_template("index_user.html", login=login)
     else:
         return render_template("vhod.html") 
 
