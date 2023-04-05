@@ -10,6 +10,7 @@ from datetime import datetime
 from sqlalchemy.sql import func
 import graph
 from flask_login import UserMixin, LoginManager, login_user, login_required, current_user
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'supersecretkey'
@@ -49,7 +50,7 @@ def load_user(user_id):
 def index():
     if request.method == 'POST':
         file = request.files['file']
-        upload = Upload(filename = file.filename, Data = file.read())
+        upload = Upload(filename = file.filename, Data = file.read(), Login = session['login'])
 
         db.session.add(upload)
         db.session.commit()
@@ -58,7 +59,7 @@ def index():
         f = Upload.query.filter_by(id=i_d).first()
 
         graph.draw(f.Data, f.filename)
-        return redirect('/')
+        return redirect('/user_page')
         
     return render_template("index.html")
 
@@ -78,7 +79,7 @@ def vhod():
         else:
             session['login'] = user.login
             session['email'] = user.email
-            session['password'] = user.password
+            session['password'] = password
             return redirect('/user_page')
     else:
         return render_template("vhod.html") 
@@ -106,23 +107,25 @@ def reg():
 @app.route('/user_page', methods=["GET",'POST'])
 def index_user():
     user = Users.query.filter_by().first()
-    login = user.login
     if request.method == 'POST':
         file = request.files['file']
-        upload = Upload(filename = file.filename, Data = file.read())
+        upload = Upload(filename = file.filename, Data = file.read(), Login = user.login)
 
         db.session.add(upload)
         db.session.commit()
         
         i_d = upload.id
         f = Upload.query.filter_by(id=i_d).first()
-        return graph.draw(f.Data, f.filename), render_template("index_user.html", login=login)
+        graph.draw(f.Data, f.filename)
+        return render_template("index_user.html")
     else:   
-        return render_template("index_user.html", login=login)
+        return render_template("index_user.html")
 
 @app.route('/profile', methods=["GET",'POST'] )
 def profile():
-    return render_template('profile.html')
+    files = Upload.query.filter_by(Login=session['login']).all()
+    users = Users.query.order_by(Users.id).all()
+    return render_template('profile.html', users=users, files=files)
 
 
 if __name__ == "__main__":
