@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import *
 from flask_wtf import FlaskForm
 from wtforms import FileField, SubmitField
 from flask_sqlalchemy import SQLAlchemy
@@ -35,8 +35,11 @@ class Users(UserMixin, db.Model):
     email = db.Column(db.String(50))
 
     def is_authenticated(self):
-        """Return True if the user is authenticated."""
         return self.authenticated
+
+login_manager = LoginManager()
+login_manager.login_view = 'vhod'
+login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -51,10 +54,14 @@ def index():
         db.session.add(upload)
         db.session.commit()
         
+        i_d = upload.id
+        f = Upload.query.filter_by(id=i_d).first()
+
         graph.draw(f.Data, f.filename)
         return redirect('/')
         
     return render_template("index.html")
+
 
 @app.route('/vhod', methods=["GET",'POST'] )
 def vhod():
@@ -63,13 +70,16 @@ def vhod():
         password = request.form['password']
 
         user = Users.query.filter_by(email=email).first()
-        login = user.login
+    
 
         if not user or not check_password_hash(user.password, password):
             flash('Проверьте логин или пароль')
             return redirect('/vhod')
         else:
-            return render_template("index_user.html", login=login)
+            session['login'] = user.login
+            session['email'] = user.email
+            session['password'] = user.password
+            return redirect('/user_page')
     else:
         return render_template("vhod.html") 
 
@@ -93,7 +103,7 @@ def reg():
     else:
         return render_template("reg.html")
 
-@app.route('/user', methods=["GET",'POST'])
+@app.route('/user_page', methods=["GET",'POST'])
 def index_user():
     user = Users.query.filter_by().first()
     login = user.login
@@ -109,6 +119,10 @@ def index_user():
         return graph.draw(f.Data, f.filename), render_template("index_user.html", login=login)
     else:   
         return render_template("index_user.html", login=login)
+
+@app.route('/profile', methods=["GET",'POST'] )
+def profile():
+    return render_template('profile.html')
 
 
 if __name__ == "__main__":

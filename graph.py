@@ -65,6 +65,7 @@ def draw(data,name):
                 listy1 = []
                 listy2 = []
                 listG = [0]
+    os.remove(name)
     return fig.show()
 
 

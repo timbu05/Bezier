@@ -32,7 +32,7 @@
 }
 .vv{
     margin-top: 13%;
-    
+    background-color: white;
 }
 .ll{
     margin-left: 5%;
@@ -62,7 +62,7 @@
 }
 .vv2{
     margin-top: 10%;
-   
+    background-color: white;
 }
 .cc{
     background-color:#f7f7f7;    
@@ -92,4 +92,12 @@
 .s3{
     margin-left: 50%;
     margin-right: 0%;
+}
+
+.sign_in{
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
+}
+
+.sign_up{
+    background-image: url('/static/img/Hero_Desktop-47db29dfa0ec27da097f38bbbe35c8ae.jpg');
 }
