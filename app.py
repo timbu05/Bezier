@@ -80,6 +80,7 @@ def vhod():
             session['login'] = user.login
             session['email'] = user.email
             session['password'] = password
+            session['id'] = user.id
             return redirect('/user_page')
     else:
         return render_template("vhod.html") 
@@ -90,12 +91,20 @@ def reg():
         login = request.form['login']
         email = request.form['email']
         password = request.form['exampleInputPassword']
+        password1 = request.form['exampleInputPassword1']
         
-        user = Users.query.filter_by(email=email).first()
-        if user:
+        user_email = Users.query.filter_by(email=email).first()
+        user_login = Users.query.filter_by(login=login).first()
+        if user_email:
             flash('Email уже используется')
             return redirect('/reg')
-
+        if user_login:
+            flash('Логин уже используется')
+            return redirect('/reg')
+        if password != password1:
+            flash('Пароли не совпадают')
+            return redirect('/reg')
+            
         new_user = Users(email=email, login=login, password=generate_password_hash(password, method='sha256'))
 
         db.session.add(new_user)
@@ -125,8 +134,31 @@ def index_user():
 def profile():
     files = Upload.query.filter_by(Login=session['login']).all()
     users = Users.query.order_by(Users.id).all()
-    return render_template('profile.html', users=users, files=files)
+    cur_user = Users.query.get(session['id'])
 
+    if request.method == 'POST':
+            cur_user.login = request.form['login']
+            cur_user.email = request.form['email']
+            cur_user.password = generate_password_hash(request.form['password'], method='sha256')
+            session['login'] = cur_user.login
+            session['email'] = cur_user.email
+            session['password'] = request.form['password']
+            session['id'] = cur_user.id 
+        
+            for el in files:
+                el.Login = request.form['login']
+
+
+            db.session.commit()
+            return redirect('/profile')
+    else:
+        return render_template('profile.html', users=users, files=files)
+
+@app.route('/download/<path:filename>')
+def download(filename):
+    f = Upload.query.filter_by(filename=filename).first()
+    graph.draw(f.Data,f.filename)
+    return redirect("/profile")
 
 if __name__ == "__main__":
     app.run()
