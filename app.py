@@ -154,6 +154,26 @@ def profile():
     else:
         return render_template('profile.html', users=users, files=files)
 
+
+@app.route('/view_user',methods=["GET"]) 
+def view_user():
+    if request.method == 'GET':
+        if request.args.get('login') is None:
+            return render_template('permissionerror.html')
+        else:
+            user = db.session.execute(db.select(Users).where(Users.login == request.args.get('login')))
+            if user is None:
+                return render_template('permissionerror.html')
+            else:
+                user = user.all()[0][0]
+                files = Upload.query.filter_by(Login=user.login).all()
+                users = Users.query.order_by(Users.id).all()
+                return render_template('view_user.html', users=users, files=files, userlogin = user.login, useremail = user.email)
+
+
+
+
+
 @app.route('/download/<path:filename>')
 def download(filename):
     f = Upload.query.filter_by(filename=filename).first()

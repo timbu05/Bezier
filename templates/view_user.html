@@ -68,37 +68,27 @@
           <form class="si2 cc rounded shadow-sm" method="POST" action = '/profile' enctype = 'multipart/form-data'>
             
             <div class="lg">
-                <h2 >{{ session['login'] }}</h2>
+                <h2 >{{ userlogin }}</h2>
             
             </div>
 
             <div class="mb-4 mt-3 row">
                 <div class="re col-md ">
                     <label for="exampleInputEmail1" class="form-label ">Имя</label>
-                    <input type="text" name="login" id="login" class="form-control" placeholder="" aria-label="Имя" value="{{ session['login'] }}">
+                    <input type="text" name="login" id="login" class="form-control" placeholder="" aria-label="Имя" value="{{ userlogin }}" readonly>
                 </div>
                 <div class=" col-md pr">
                     <label for="exampleInputEmail1" class="form-label ">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ session['email'] }}">
+                    <input type="email" name="email" id="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ useremail }}" readonly>
                 </div>
             </div>
-            
-            <div class="mb-3 re prpa">
-              <label for="exampleInputPassword1" class="form-label">Пароль</label>
-              <input type="text" name="password" id="password" class="form-control" placeholder="" aria-label="Имя" value="{{ session['password'] }}">
-            </div>  
+          
 
             <div class="p-1">
 
             </div>
-            <div class="re">
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-            </div>
             
           
-            <div class="p-3">
-
-            </div>
         
           </form> 
         
@@ -144,7 +134,6 @@
                   </li>
                   {% endfor %}
               </ul>
-            </div>
             
           </div> 
 
@@ -155,7 +144,6 @@
         <div></div>
 
 
-  
 
         </div>
       </div>
