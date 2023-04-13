@@ -59,7 +59,7 @@ def index():
         f = Upload.query.filter_by(id=i_d).first()
 
         graph.draw(f.Data, f.filename)
-        return redirect('/')
+        return redirect('/gr')
     else:   
         return render_template("index.html")
 
@@ -126,7 +126,7 @@ def index_user():
         i_d = upload.id
         f = Upload.query.filter_by(id=i_d).first()
         graph.draw(f.Data, f.filename)
-        return redirect('/user_page')
+        return redirect('/gr')
     else:   
         return render_template("index_user.html")
 
@@ -178,7 +178,7 @@ def view_user():
 def download(filename):
     f = Upload.query.filter_by(filename=filename).first()
     graph.draw(f.Data,f.filename)
-    return redirect("/profile")
+    return redirect("/gr")
 
 @app.route('/gr', methods=["GET","POST"] )
 def gr():

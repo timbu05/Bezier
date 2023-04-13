@@ -66,6 +66,8 @@ def draw(data,name):
                 listy2 = []
                 listG = [0]
     os.remove(name)
-    return fig.show()
+    f = open('templates/gr.html', 'w+')
+    f.write(fig.to_html(include_plotlyjs='cdn'))
+    f.close()
 
 
