@@ -10,6 +10,8 @@ import pandas as pd
 from scipy.interpolate import CubicSpline
 
 
+
+
 def draw_fig(x, y, mark, fig):
     cs = CubicSpline(x, y)
     fig.add_trace(go.Scatter(x=np.arange(0, 1.01, 0.01), y = cs(np.arange(0, 1.01, 0.01))))
@@ -25,7 +27,7 @@ listG = [0]
 
 
 def draw(data,name):
-    file = open(name, 'w+')
+    file = open(name, 'w+', encoding='utf-8')
     file.write(data.decode('utf-8'))
     file.close()
 
@@ -40,8 +42,11 @@ def draw(data,name):
         file_reader = csv.reader(file1, delimiter = ";")
         row = file_reader.__next__()
         row = file_reader.__next__()
+        row = file_reader.__next__()
         mark = row[-1]
         for row in file_reader:
+            if not row:
+                continue
             print(row)
             if row[0] != '':
                 listx2.append(float(row[0]))
@@ -66,6 +71,17 @@ def draw(data,name):
                 listy2 = []
                 listG = [0]
     os.remove(name)
-    return fig.show()
+    
+    if os.path.isfile('templates/gr.html'):
+        os.remove('templates/gr.html')
+        print("adsgggggggggggggggggggggggggggggggggggggggggggggggggg")
+
+    f = open('templates/gr.html', 'w')
+    f.write(fig.to_html(include_plotlyjs='cdn'))
+    f.close()
+    
+    
+    
+    
 
 

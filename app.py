@@ -56,13 +56,16 @@ def index():
         db.session.commit()
         
         i_d = upload.id
+        
         f = Upload.query.filter_by(id=i_d).first()
-
+        
         graph.draw(f.Data, f.filename)
-        return redirect('/')
+        return redirect('/gr')
+        
+
     else:   
         return render_template("index.html")
-
+        
 
 @app.route('/vhod', methods=["GET",'POST'] )
 def vhod():
@@ -115,7 +118,7 @@ def reg():
 
 @app.route('/user_page', methods=["GET",'POST'])
 def index_user():
-    user = Users.query.filter_by().first()
+    user = Users.query.filter_by(login=session["login"]).first()
     if request.method == 'POST':
         file = request.files['file']
         upload = Upload(filename = file.filename, Data = file.read(), Login = user.login)
@@ -125,10 +128,12 @@ def index_user():
         
         i_d = upload.id
         f = Upload.query.filter_by(id=i_d).first()
+        print(f.filename)
         graph.draw(f.Data, f.filename)
-        return redirect('/user_page')
+        return redirect('/gr')
     else:   
         return render_template("index_user.html")
+    
 
 @app.route('/profile', methods=["GET",'POST'] )
 def profile():
@@ -151,6 +156,7 @@ def profile():
 
             db.session.commit()
             return redirect('/profile')
+
     else:
         return render_template('profile.html', users=users, files=files)
 
@@ -178,7 +184,7 @@ def view_user():
 def download(filename):
     f = Upload.query.filter_by(filename=filename).first()
     graph.draw(f.Data,f.filename)
-    return redirect("/profile")
+    return redirect("/gr")
 
 @app.route('/gr', methods=["GET","POST"] )
 def gr():
