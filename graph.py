@@ -77,7 +77,7 @@ def draw(data,name):
         print("adsgggggggggggggggggggggggggggggggggggggggggggggggggg")
 
     f = open('templates/gr.html', 'w')
-    f.write(fig.to_html(include_plotlyjs='cdn'))
+    f.write(fig.to_html(full_html=False, include_plotlyjs='cdn'))
     f.close()
     
     
